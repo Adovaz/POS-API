@@ -16,3 +16,17 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function () use ($router) {
+  $router->get('all_products',  ['uses' => 'productController@getAllProducts']);
+
+  $router->get('product/{id}', ['uses' => 'productController@getProduct']);
+
+  $router->post('product', ['uses' => 'productController@create']);
+
+  $router->delete('product/{id}', ['uses' => 'productController@delete']);
+
+  $router->put('product/{id}', ['uses' => 'productController@update']);
+});
+
+?>
