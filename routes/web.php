@@ -12,21 +12,46 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-/** 
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'api'], function () use ($router) {
-  $router->get('all_products',  ['uses' => 'productController@getAllProducts']);
+/**Routing for products */
 
-  $router->get('product/{id}', ['uses' => 'productController@getProduct']);
+$router->group(['prefix' => 'products'], function () use ($router) {
+  $router->get('all',  ['uses' => '']);
 
-  $router->post('product', ['uses' => 'productController@create']);
+  $router->get('get/{id}', ['uses' => '']);
 
-  $router->delete('product/{id}', ['uses' => 'productController@delete']);
+  $router->post('new', ['uses' => '']);
 
-  $router->put('product/{id}', ['uses' => 'productController@update']);
+  $router->delete('delete/{id}', ['uses' => '']);
+
+  $router->put('update/{id}', ['uses' => '']);
 });
 
+$router->group(['prefix' => 'suppliers'], function () use ($router) {
+  $router->get('all',  ['uses' => '']);
+
+  $router->get('get/{id}', ['uses' => '']);
+
+  $router->post('new', ['uses' => '']);
+
+  $router->delete('delete/{id}', ['uses' => '']);
+
+  $router->put('update/{id}', ['uses' => '']);
+});
+
+$router->group(['prefix' => 'branches'], function () use ($router) {
+  $router->get('all',  ['uses' => '']);
+
+  $router->get('get/{id}', ['uses' => '']);
+
+  $router->post('new', ['uses' => '']);
+
+  $router->delete('delete/{id}', ['uses' => '']);
+
+  $router->put('update/{id}', ['uses' => '']);
+});
 ?>
