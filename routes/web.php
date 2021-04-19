@@ -32,11 +32,11 @@ $router->group(['prefix' => 'products'], function () use ($router) {
 });
 
 $router->group(['prefix' => 'suppliers'], function () use ($router) {
-  $router->get('all',  ['uses' => '']);
+  $router->get('all',  ['uses' => 'SupplierController@get_all']);
 
   $router->get('get/{id}', ['uses' => '']);
 
-  $router->post('new', ['uses' => '']);
+  $router->post('new', ['uses' => 'SupplierController@create']);
 
   $router->delete('delete/{id}', ['uses' => '']);
 

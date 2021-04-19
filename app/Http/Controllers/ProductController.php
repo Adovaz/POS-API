@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\products;
-use App\Models\Supplier;
+use Illuminate\Http\Request;
+use App\Models\Product;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 
