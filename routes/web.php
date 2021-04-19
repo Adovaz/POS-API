@@ -17,7 +17,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-/**Routing for products */
+/**Routing for Products */
 
 $router->group(['prefix' => 'products'], function () use ($router) {
   $router->get('all',  ['uses' => '']);
@@ -31,17 +31,35 @@ $router->group(['prefix' => 'products'], function () use ($router) {
   $router->put('update/{id}', ['uses' => '']);
 });
 
+/**Routing for Product Categories */
+
+$router->group(['prefix' => 'productcategories'], function () use ($router) {
+  $router->get('all',  ['uses' => 'ProductCategoryController@get_all']);
+
+  $router->get('get/{id}', ['uses' => 'ProductCategoryController@get']);
+
+  $router->post('new', ['uses' => 'ProductCategoryController@create']);
+
+  $router->delete('delete/{id}', ['uses' => 'ProductCategoryController@delete']);
+
+  $router->put('update/{id}', ['uses' => 'ProductCategoryController@update']);
+});
+
+/**Routing for Suppliers */
+
 $router->group(['prefix' => 'suppliers'], function () use ($router) {
   $router->get('all',  ['uses' => 'SupplierController@get_all']);
 
-  $router->get('get/{id}', ['uses' => '']);
+  $router->get('get/{id}', ['uses' => 'SupplierController@get']);
 
   $router->post('new', ['uses' => 'SupplierController@create']);
 
-  $router->delete('delete/{id}', ['uses' => '']);
+  $router->delete('delete/{id}', ['uses' => 'SupplierController@delete']);
 
-  $router->put('update/{id}', ['uses' => '']);
+  $router->put('update/{id}', ['uses' => 'SupplierController@update']);
 });
+
+/**Routing for Branches */
 
 $router->group(['prefix' => 'branches'], function () use ($router) {
   $router->get('all',  ['uses' => '']);

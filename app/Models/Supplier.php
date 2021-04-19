@@ -21,7 +21,5 @@ class Supplier extends Model
      *
      * @var array
      */
-    protected $hidden = [
-        '',
-    ];
+    protected $hidden = [];
 }
