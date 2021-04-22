@@ -32,6 +32,7 @@ $router->group(['prefix' => 'products'], function () use ($router) {
 });
 
  /**Routing for Product Variations */
+ 
 $router->group(['prefix' => 'productvariations'], function () use ($router) {
   
   $router->get('all',  ['uses' => 'ProductVariationController@get_all']);
