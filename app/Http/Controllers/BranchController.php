@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Branch;
+use App\Models\ProductVariation;
+use App\Models\BranchStock;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 
@@ -21,6 +23,14 @@ class BranchController extends BaseController
     public function create(Request $request)
     {
         $Branch = Branch::create($request->all());
+        foreach (ProductVariation::all() as $productvariation) 
+        {
+        $BranchStock = BranchStock::create([
+            'product_variation_id' => $productvariation->id,
+            'branch_id' => $Branch->id,
+            'quantity' => 0,
+        ]);
+        }
         return response()->json($Branch, 201);
     }
 

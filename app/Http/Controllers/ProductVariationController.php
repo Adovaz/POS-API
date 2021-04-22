@@ -47,6 +47,7 @@ class ProductVariationController extends BaseController
     public function delete($id)
     {
         ProductVariation::findOrFail($id)->delete();
+        
         return response('Deleted Successfully', 200);
     }
     
