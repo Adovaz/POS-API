@@ -20,15 +20,15 @@ $router->get('/', function () use ($router) {
 /**Routing for Products */
 
 $router->group(['prefix' => 'products'], function () use ($router) {
-  $router->get('all',  ['uses' => '']);
+  $router->get('all',  ['uses' => 'ProductController@get_all']);
 
-  $router->get('get/{id}', ['uses' => '']);
+  $router->get('get/{id}', ['uses' => 'ProductController@get']);
 
-  $router->post('new', ['uses' => '']);
+  $router->post('new', ['uses' => 'ProductController@create']);
 
-  $router->delete('delete/{id}', ['uses' => '']);
+  $router->delete('delete/{id}', ['uses' => 'ProductController@delete']);
 
-  $router->put('update/{id}', ['uses' => '']);
+  $router->put('update/{id}', ['uses' => 'ProductController@update']);
 });
 
 /**Routing for Product Categories */

@@ -16,10 +16,10 @@ class CreateSuppliers extends Migration
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('description', 250);
-            $table->string('email', 50);
-            $table->string('phone', 50);
-            $table->string('address', 100);
+            $table->string('description', 250)->nullable();
+            $table->string('email', 50)->nullable();
+            $table->string('phone', 50)->nullable();
+            $table->string('address', 100)->nullable();
             $table->timestamps();
         });
     }
