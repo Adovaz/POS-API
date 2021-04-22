@@ -89,7 +89,8 @@ $router->group(['prefix' => 'branches'], function () use ($router) {
 
   $router->put('update/{id}', ['uses' => 'BranchController@update']);
 });
-/**Routing for Branch */
+
+/**Routing for Branch Stock*/
 
 $router->group(['prefix' => 'stock'], function () use ($router) {
   $router->get('all',  ['uses' => 'BranchStockController@get_all']);
@@ -101,5 +102,19 @@ $router->group(['prefix' => 'stock'], function () use ($router) {
   $router->delete('delete/{id}', ['uses' => 'BranchStockController@delete']);
 
   $router->put('update/{id}', ['uses' => 'BranchStockController@update']);
+});
+
+/**Routing for Staff */
+
+$router->group(['prefix' => 'staff'], function () use ($router) {
+  $router->get('all',  ['uses' => 'StaffController@get_all']);
+
+  $router->get('get/{id}', ['uses' => 'StaffController@get']);
+
+  $router->post('new', ['uses' => 'StaffController@create']);
+
+  $router->delete('delete/{id}', ['uses' => 'StaffController@delete']);
+
+  $router->put('update/{id}', ['uses' => 'StaffController@update']);
 });
 ?>
