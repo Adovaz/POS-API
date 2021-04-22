@@ -25,7 +25,7 @@ class BranchController extends BaseController
         $Branch = Branch::create($request->all());
         foreach (ProductVariation::all() as $productvariation) 
         {
-        $BranchStock = BranchStock::create([
+        BranchStock::create([
             'product_variation_id' => $productvariation->id,
             'branch_id' => $Branch->id,
             'quantity' => 0,
