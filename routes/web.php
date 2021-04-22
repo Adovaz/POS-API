@@ -62,14 +62,14 @@ $router->group(['prefix' => 'suppliers'], function () use ($router) {
 /**Routing for Branches */
 
 $router->group(['prefix' => 'branches'], function () use ($router) {
-  $router->get('all',  ['uses' => '']);
+  $router->get('all',  ['uses' => 'BranchController@get_all']);
 
-  $router->get('get/{id}', ['uses' => '']);
+  $router->get('get/{id}', ['uses' => 'BranchController@get']);
 
-  $router->post('new', ['uses' => '']);
+  $router->post('new', ['uses' => 'BranchController@create']);
 
-  $router->delete('delete/{id}', ['uses' => '']);
+  $router->delete('delete/{id}', ['uses' => 'BranchController@delete']);
 
-  $router->put('update/{id}', ['uses' => '']);
+  $router->put('update/{id}', ['uses' => 'BranchController@update']);
 });
 ?>
