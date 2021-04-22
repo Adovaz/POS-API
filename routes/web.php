@@ -30,6 +30,21 @@ $router->group(['prefix' => 'products'], function () use ($router) {
 
   $router->put('update/{id}', ['uses' => 'ProductController@update']);
 });
+ /**Routing for Product Variations */
+$router->group(['prefix' => 'productvariations'], function () use ($router) {
+  $router->get('all',  ['uses' => 'ProductVariationController@get_all']);
+
+  /**Note 
+   * Get method requires the parent product id NOT the pimary id
+   */
+  $router->get('get/{product_id}', ['uses' => 'ProductVariationController@get']);
+
+  $router->post('new', ['uses' => 'ProductVariationController@create']);
+
+  $router->delete('delete/{id}', ['uses' => 'ProductVariationController@delete']);
+
+  $router->put('update/{id}', ['uses' => 'ProductVariationController@update']);
+});
 
 /**Routing for Product Categories */
 
