@@ -21,7 +21,6 @@ class BranchController extends BaseController
     public function create(Request $request)
     {
         $Branch = Branch::create($request->all());
-
         return response()->json($Branch, 201);
     }
 
