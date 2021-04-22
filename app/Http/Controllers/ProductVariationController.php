@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductVariation;
 use App\Models\BranchStock;
 use App\Models\Branch;
+use App\Models\Product;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 
@@ -15,23 +16,23 @@ class ProductVariationController extends BaseController
         return response()->json(ProductVariation::all());
     }
 
-    public function get($product_id)
+    public function get($id)
     {
-        return response()->json(ProductVariation::where('product_id', '=', $product_id));
+        $ProductVariations = ProductVariation::where('product_id', $id)->get();
+        return response()->json($ProductVariations);
     }
 
     public function create(Request $request)
     {
         $ProductVariation = ProductVariation::create($request->all());
-        
         foreach (Branch::all() as $branches) 
         {
-        $BranchStock = new BranchStock();
-        $BranchStock->product_variation_id = $request->id;
-        $BranchStock->branch_id = $branches;
-        $BranchStock->quantity = 0;
+        $BranchStock = BranchStock::create([
+            'product_variation_id' => $ProductVariation->id,
+            'branch_id' => $branches->id,
+            'quantity' => 0,
+        ]);
         };
-
         return response()->json($ProductVariation, 201);
     }
 

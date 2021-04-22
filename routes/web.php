@@ -30,14 +30,16 @@ $router->group(['prefix' => 'products'], function () use ($router) {
 
   $router->put('update/{id}', ['uses' => 'ProductController@update']);
 });
+
  /**Routing for Product Variations */
 $router->group(['prefix' => 'productvariations'], function () use ($router) {
+  
   $router->get('all',  ['uses' => 'ProductVariationController@get_all']);
 
   /**Note 
    * Get method requires the parent product id NOT the pimary id
    */
-  $router->get('get/{product_id}', ['uses' => 'ProductVariationController@get']);
+  $router->get('get/{id}', ['uses' => 'ProductVariationController@get']);
 
   $router->post('new', ['uses' => 'ProductVariationController@create']);
 
@@ -86,5 +88,18 @@ $router->group(['prefix' => 'branches'], function () use ($router) {
   $router->delete('delete/{id}', ['uses' => 'BranchController@delete']);
 
   $router->put('update/{id}', ['uses' => 'BranchController@update']);
+});
+/**Routing for Branch */
+
+$router->group(['prefix' => 'stock'], function () use ($router) {
+  $router->get('all',  ['uses' => 'BranchStockController@get_all']);
+
+  $router->get('get/{id}', ['uses' => 'BranchStockController@get']);
+
+  $router->post('new', ['uses' => 'BranchStockController@create']);
+
+  $router->delete('delete/{id}', ['uses' => 'BranchStockController@delete']);
+
+  $router->put('update/{id}', ['uses' => 'BranchStockController@update']);
 });
 ?>
