@@ -27,7 +27,7 @@ class ProductVariationController extends BaseController
         $ProductVariation = ProductVariation::create($request->all());
         foreach (Branch::all() as $branches) 
         {
-        $BranchStock = BranchStock::create([
+        BranchStock::create([
             'product_variation_id' => $ProductVariation->id,
             'branch_id' => $branches->id,
             'quantity' => 0,
@@ -47,7 +47,7 @@ class ProductVariationController extends BaseController
     public function delete($id)
     {
         ProductVariation::findOrFail($id)->delete();
-        
+
         return response('Deleted Successfully', 200);
     }
     

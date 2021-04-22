@@ -6,7 +6,7 @@ use App\Models\BranchStock;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 
-class ProductCategoryController extends BaseController
+class BranchStockController extends BaseController
 {
     public function get_all()
     {
