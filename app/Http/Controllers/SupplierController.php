@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 class SupplierController extends BaseController
 {
-    public function get_all()
+    public function getAll()
     {
         return response()->json(Supplier::all());
     }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class BranchController extends BaseController
 {
-    public function get_all()
+    public function getAll()
     {
         return response()->json(Branch::all());
     }
@@ -22,7 +22,7 @@ class BranchController extends BaseController
 
     public function create(Request $request)
     {
-        $Branch = Branch::create($request->all());
+        $Branch = Branch::create();
         foreach (ProductVariation::all() as $productvariation) 
         {
         BranchStock::create([

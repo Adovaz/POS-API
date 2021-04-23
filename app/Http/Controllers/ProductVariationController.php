@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 class ProductVariationController extends BaseController
 {
-    public function get_all()
+    public function getAll()
     {
         return response()->json(ProductVariation::all());
     }

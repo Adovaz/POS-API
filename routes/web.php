@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
 /**Routing for Products */
 
 $router->group(['prefix' => 'products'], function () use ($router) {
-  $router->get('all',  ['uses' => 'ProductController@get_all']);
+  $router->get('all',  ['uses' => 'ProductController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'ProductController@get']);
 
@@ -35,7 +35,7 @@ $router->group(['prefix' => 'products'], function () use ($router) {
 
 $router->group(['prefix' => 'productvariations'], function () use ($router) {
   
-  $router->get('all',  ['uses' => 'ProductVariationController@get_all']);
+  $router->get('all',  ['uses' => 'ProductVariationController@getAll']);
 
   /**Note 
    * Get method requires the parent product id NOT the pimary id
@@ -52,7 +52,7 @@ $router->group(['prefix' => 'productvariations'], function () use ($router) {
 /**Routing for transactions */
 
 $router->group(['prefix' => 'transaction'], function () use ($router) {
-  $router->get('all',  ['uses' => 'TransactionController@get_all']);
+  $router->get('all',  ['uses' => 'TransactionController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'TransactionController@get']);
 
@@ -66,7 +66,7 @@ $router->group(['prefix' => 'transaction'], function () use ($router) {
 /**Routing for Product Categories */
 
 $router->group(['prefix' => 'productcategories'], function () use ($router) {
-  $router->get('all',  ['uses' => 'ProductCategoryController@get_all']);
+  $router->get('all',  ['uses' => 'ProductCategoryController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'ProductCategoryController@get']);
 
@@ -80,7 +80,7 @@ $router->group(['prefix' => 'productcategories'], function () use ($router) {
 /**Routing for Suppliers */
 
 $router->group(['prefix' => 'suppliers'], function () use ($router) {
-  $router->get('all',  ['uses' => 'SupplierController@get_all']);
+  $router->get('all',  ['uses' => 'SupplierController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'SupplierController@get']);
 
@@ -94,7 +94,7 @@ $router->group(['prefix' => 'suppliers'], function () use ($router) {
 /**Routing for Branches */
 
 $router->group(['prefix' => 'branches'], function () use ($router) {
-  $router->get('all',  ['uses' => 'BranchController@get_all']);
+  $router->get('all',  ['uses' => 'BranchController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'BranchController@get']);
 
@@ -108,7 +108,7 @@ $router->group(['prefix' => 'branches'], function () use ($router) {
 /**Routing for Branch Stock*/
 
 $router->group(['prefix' => 'stock'], function () use ($router) {
-  $router->get('all',  ['uses' => 'BranchStockController@get_all']);
+  $router->get('all',  ['uses' => 'BranchStockController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'BranchStockController@get']);
 
@@ -122,7 +122,7 @@ $router->group(['prefix' => 'stock'], function () use ($router) {
 /**Routing for Staff */
 
 $router->group(['prefix' => 'staff'], function () use ($router) {
-  $router->get('all',  ['uses' => 'StaffController@get_all']);
+  $router->get('all',  ['uses' => 'StaffController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'StaffController@get']);
 

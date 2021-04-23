@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 class TransactionController extends BaseController
 {
-    public function get_all()
+    public function getAll()
     {
         return response()->json(Transaction::all());
     }
@@ -39,7 +39,7 @@ class TransactionController extends BaseController
             ]);
             BranchStock::where('product_variation_id', $products['product_variation_id'])
             ->where('branch_id', $request->branch_id)
-            ->increment('quantity', -1 * $products['quantity']);
+            ->decrement('quantity', $products['quantity']);
         }
 
         return response()->json($Transaction, 201);
