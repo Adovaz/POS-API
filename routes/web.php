@@ -32,7 +32,7 @@ $router->group(['prefix' => 'products'], function () use ($router) {
 });
 
  /**Routing for Product Variations */
- 
+
 $router->group(['prefix' => 'productvariations'], function () use ($router) {
   
   $router->get('all',  ['uses' => 'ProductVariationController@get_all']);
@@ -47,6 +47,20 @@ $router->group(['prefix' => 'productvariations'], function () use ($router) {
   $router->delete('delete/{id}', ['uses' => 'ProductVariationController@delete']);
 
   $router->put('update/{id}', ['uses' => 'ProductVariationController@update']);
+});
+
+/**Routing for transactions */
+
+$router->group(['prefix' => 'transaction'], function () use ($router) {
+  $router->get('all',  ['uses' => 'TransactionController@get_all']);
+
+  $router->get('get/{id}', ['uses' => 'TransactionController@get']);
+
+  $router->post('new', ['uses' => 'TransactionController@create']);
+
+  $router->delete('delete/{id}', ['uses' => 'TransactionController@delete']);
+
+  $router->put('update/{id}', ['uses' => 'TransactionController@update']);
 });
 
 /**Routing for Product Categories */
