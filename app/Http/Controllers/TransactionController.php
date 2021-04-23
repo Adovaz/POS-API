@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Sale;
+use App\Models\BranchStock;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Cache;
 
@@ -35,6 +37,9 @@ class TransactionController extends BaseController
                 'product_variation_id' => $products['product_variation_id'],
                 'quantity' => $products['quantity'],
             ]);
+            BranchStock::where('product_variation_id', $products['product_variation_id'])
+            ->where('branch_id', $request->branch_id)
+            ->increment('quantity', -1 * $products['quantity']);
         }
 
         return response()->json($Transaction, 201);
