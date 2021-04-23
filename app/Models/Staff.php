@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-class Staff extends Model
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+
+class Staff extends Model implements Authenticatable
 {
+    use AuthenticableTrait;
+
 
     /**
      * The attributes that are mass assignable.
@@ -13,7 +18,7 @@ class Staff extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name', 'password',
     ];
 
     /**
@@ -22,6 +27,6 @@ class Staff extends Model
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password'
     ];
 }

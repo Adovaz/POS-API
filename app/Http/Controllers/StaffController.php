@@ -3,25 +3,21 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Staff;
-use App\Http\Controllers\Controller;
 use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class StaffController extends BaseController
 {
     public function authenticate(Request $request)
     {
-        $this->validate($request, [
-        'name' => 'required',
-        'password' => 'required'
-         ]);
-         $staff = Staff::where('name', $request->input('name'))->first();
-         if(Hash::check($request->input('password'), $staff->password))
+        $staff_id = $request->staff_id;
+         if($request->password == Staff::where('id', $staff_id)->value('password'))
          {
-           $remember_token = base64_encode(str_random(40));
-           Staff::where('id', $request->input('id'))->update(['remember_token' => "$remember_token"]);;
-           return response()->json(['status' => 'success','rmemeber_token' => $remember_token]);
+           $remember_token = base64_encode(Str::random(40));
+           $Staff = Staff::findOrFail($staff_id);
+           $Staff->update(['remember_token' => "blahh"]);;
+           return response()->json(['status' => 'success','rememeber_token' => $remember_token]);
          }
          else
          {
