@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateStaff extends Migration
 {
@@ -16,8 +17,8 @@ class CreateStaff extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('password', 100);
-            $table->rememberToken();
+            $table->string('password', 1000);
+            $table->string('remember_token', 1000)->nullable();
             $table->timestamps();
         });
     }

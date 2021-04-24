@@ -18,7 +18,7 @@ class Staff extends Model implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password',
+        'name', 'password', 'remember_token'
     ];
 
     /**
@@ -26,7 +26,5 @@ class Staff extends Model implements Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password'
-    ];
+    protected $hidden = [];
 }

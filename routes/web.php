@@ -124,8 +124,6 @@ $router->group(['prefix' => 'stock'], function () use ($router) {
 $router->group(['prefix' => 'staff'], function () use ($router) {
   $router->get('all',  ['uses' => 'StaffController@getAll']);
 
-  $router->get('login', ['uses' => 'StaffController@authenticate']);
-
   $router->get('get/{id}', ['uses' => 'StaffController@get']);
 
   $router->post('new', ['uses' => 'StaffController@create']);
@@ -134,4 +132,10 @@ $router->group(['prefix' => 'staff'], function () use ($router) {
 
   $router->put('update/{id}', ['uses' => 'StaffController@update']);
 });
+
+$router->group(['prefix' => 'auth'], function () use ($router) {
+
+  $router->post('login', ['uses' => 'AuthController@login']);
+});
+
 ?>
