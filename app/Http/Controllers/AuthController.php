@@ -34,9 +34,14 @@ class AuthController extends BaseController
     // Verify the password and generate the token
     if (Hash::check($request->password, $hashAgainst)) {
       $token = base64_encode(STR::random(40));
+      $Staff = Staff::find($request->staff_id);
+      $Staff->remember_token = $token;
+      $Staff->save();
+/*
       Staff::where('id', $request->id)
-      ->update(['remember_token' => $token]);;
-      
+      ->update(['remember_token' => $token])
+      ->save();
+      */
       return response()->json(['remember_token' => $token], 200);
     }
 
