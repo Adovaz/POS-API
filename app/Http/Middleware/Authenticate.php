@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Staff;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
 class Authenticate
@@ -35,10 +36,16 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
+        $clientRememberToken = $request->header('Authorisation');
+        $rememberTokenAgainst = Staff::where('id', $request->header('Staff_id'))->value('remember_token');
+
+        if ($clientRememberToken == $rememberTokenAgainst) 
+        {
+            return $next($request);
+        }
+        else {
             return response('Unauthorized.', 401);
         }
 
-        return $next($request);
     }
 }

@@ -18,30 +18,18 @@ class AuthController extends BaseController
         'staff_id'     => 'required',
         'password'  => 'required'
     ]);
-
-    // Find the staff by id
-    $hashAgainst =  Staff::where('id', $request->staff_id)->value('password');
-        if (!$hashAgainst) {
-        // You wil probably have some sort of helpers or whatever
-        // to make sure that you have the same response format for
-        // differents kind of responses. But let's return the 
-        // below respose for now.
+     // Find the staff by id
+    $Staff = Staff::find($request->staff_id);
+        if (!$Staff) {
         return response()->json([
             'error' => 'Staff ID does not exist.'
         ], 400);
     }
-
     // Verify the password and generate the token
-    if (Hash::check($request->password, $hashAgainst)) {
+    if (Hash::check($request->password, $Staff->password)) {
       $token = base64_encode(STR::random(40));
-      $Staff = Staff::find($request->staff_id);
       $Staff->remember_token = $token;
       $Staff->save();
-/*
-      Staff::where('id', $request->id)
-      ->update(['remember_token' => $token])
-      ->save();
-      */
       return response()->json(['remember_token' => $token], 200);
     }
 

@@ -22,7 +22,7 @@ class BranchController extends BaseController
 
     public function create(Request $request)
     {
-        $Branch = Branch::create();
+        $Branch = Branch::create($request->all());
         foreach (ProductVariation::all() as $productvariation) 
         {
         BranchStock::create([
