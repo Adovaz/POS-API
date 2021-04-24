@@ -107,7 +107,7 @@ $router->group(['prefix' => 'branches'], function () use ($router) {
 
 /**Routing for Branch Stock*/
 
-$router->group(['prefix' => 'stock'], function () use ($router) {
+$router->group(['middleware' => 'auth'], function () use ($router) {
   $router->get('all',  ['uses' => 'BranchStockController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'BranchStockController@get']);
