@@ -20,6 +20,7 @@ class Authenticate
         $clientRememberToken = $request->header('Authorisation');
         $staffId = $request->header('StaffId');
 
+        /**ValidateHeaders */
         if(!($clientRememberToken)){
 
             return response()->json('No headers for Token', 401);
@@ -29,6 +30,7 @@ class Authenticate
             return response()->json('No headers for Staff Id', 401);
         }
 
+        /**Get staffs remember token from database */
         $rememberTokenAgainst = Staff::where('id', $staffId)->value('remember_token');
 
         if ($clientRememberToken == $rememberTokenAgainst) 

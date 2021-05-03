@@ -23,7 +23,7 @@ class AuthController extends BaseController
         if (!$Staff) {
         return response()->json([
             'error' => 'Staff ID does not exist.'
-        ], 400);
+        ], 401);
     }
     // Verify the password and generate the token
     if (Hash::check($request->password, $Staff->password)) {
@@ -35,8 +35,8 @@ class AuthController extends BaseController
 
     // Bad Request response
     return response()->json([
-        'error' => 'staff id or password is wrong.'
-    ], 400);
+        'error' => 'Staff ID or password is wrong.'
+    ], 401);
     
     }
 }

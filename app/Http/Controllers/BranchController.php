@@ -17,12 +17,25 @@ class BranchController extends BaseController
 
     public function get($id)
     {
-        return response()->json(Branch::find($id));
+        $branch = Branch::find($id);
+        if (!$branch){
+            return response()->json(
+                ['error' => 'No Branch Found'],
+                 401);
+        };
+        return response()->json();
     }
-
+    
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'name'     => 'required'
+        ]);
+
+        /**Create Branch */
         $Branch = Branch::create($request->all());
+
+        /**Update Branch Stocks */
         foreach (ProductVariation::all() as $productvariation) 
         {
         BranchStock::create([

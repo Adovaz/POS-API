@@ -24,7 +24,15 @@ class ProductVariationController extends BaseController
 
     public function create(Request $request)
     {
+        $this->validate($request, [
+            'product_id' => 'required',
+            'name'  => 'required',
+            'cost'  => 'required',
+            'retail_price'  => 'required'
+        ]);
+
         $ProductVariation = ProductVariation::create($request->all());
+
         foreach (Branch::all() as $branches) 
         {
         BranchStock::create([
@@ -41,14 +49,19 @@ class ProductVariationController extends BaseController
         $ProductVariation = ProductVariation::findOrFail($id);
         $ProductVariation->update($request->all());
 
-        return response()->json($ProductVariation, 200);
+        return response()->json(['status' => 'success', 'updated' => $ProductVariation], 200);
     }
 
     public function delete($id)
     {
-        ProductVariation::findOrFail($id)->delete();
+        if(ProductVariation::findOrFail($id)->delete()){
+            return response(['status' => 'success'], 200);
+        }
+        else{
 
-        return response('Deleted Successfully', 200);
+        return response(['status' => 'fail'], 400);
+
+        };
     }
     
 }
