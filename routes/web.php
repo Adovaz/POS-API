@@ -58,8 +58,6 @@ $router->group(['prefix' => 'transaction'], function () use ($router) {
 
   $router->post('new', ['uses' => 'TransactionController@create']);
 
-  $router->delete('delete/{id}', ['uses' => 'TransactionController@delete']);
-
   $router->put('update/{id}', ['uses' => 'TransactionController@update']);
 });
 
@@ -107,14 +105,10 @@ $router->group(['prefix' => 'branches'], function () use ($router) {
 
 /**Routing for Branch Stock*/
 
-$router->group(['middleware' => 'auth'], function () use ($router) {
+$router->group(['prefix' => 'Stock'], function () use ($router) {
   $router->get('all',  ['uses' => 'BranchStockController@getAll']);
 
   $router->get('get/{id}', ['uses' => 'BranchStockController@get']);
-
-  $router->post('new', ['uses' => 'BranchStockController@create']);
-
-  $router->delete('delete/{id}', ['uses' => 'BranchStockController@delete']);
 
   $router->put('update/{id}', ['uses' => 'BranchStockController@update']);
 });
