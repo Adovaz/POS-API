@@ -10,7 +10,13 @@ class BranchStockController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(["success" => true, BranchStock::all()], 201);
+        return response()->json(
+            [
+                "success" => true,
+                BranchStock::all(),
+            ],
+            201
+        );
     }
 
     public function get($id)
@@ -25,7 +31,10 @@ class BranchStockController extends BaseController
             );
         }
         return response()->json(
-            ["success" => true, "branchstock" => $BranchStock],
+            [
+                "success" => true,
+                "stock" => $BranchStock,
+            ],
             201
         );
     }
@@ -34,6 +43,7 @@ class BranchStockController extends BaseController
     public function create(Request $request)
     {
         $BranchStock = BranchStock::create($request->all());
+
         if (!$BranchStock) {
             return response()->json(
                 [
@@ -43,7 +53,10 @@ class BranchStockController extends BaseController
             );
         }
         return response()->json(
-            ["success" => true, "branchstock" => $BranchStock],
+            [
+                "success" => true,
+                "stock" => $BranchStock,
+            ],
             201
         );
     }
@@ -51,6 +64,7 @@ class BranchStockController extends BaseController
     public function update($id, Request $request)
     {
         $BranchStock = BranchStock::find($id);
+
         if (!$BranchStock) {
             return response()->json(
                 [
@@ -62,7 +76,10 @@ class BranchStockController extends BaseController
         $BranchStock->update($request->all());
 
         return response()->json(
-            ["success" => true, "branchstock" => $BranchStock],
+            [
+                "success" => true,
+                "stock" => $BranchStock,
+            ],
             200
         );
     }
@@ -80,6 +97,11 @@ class BranchStockController extends BaseController
             );
         }
         $BranchStock->delete();
-        return response(["success" => true], 200);
+        return response(
+            [
+                "success" => true,
+            ],
+            200
+        );
     }
 }

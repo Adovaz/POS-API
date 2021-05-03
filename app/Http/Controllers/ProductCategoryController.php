@@ -11,7 +11,10 @@ class ProductCategoryController extends BaseController
     public function getAll()
     {
         return response()->json(
-            ["success" => true, ProductCategory::all()],
+            [
+                "success" => true,
+                ProductCategory::all(),
+            ],
             201
         );
     }
@@ -28,7 +31,10 @@ class ProductCategoryController extends BaseController
             );
         }
         return response()->json(
-            ["success" => true, "ProductCategory" => $ProductCategory],
+            [
+                "success" => true,
+                "ProductCategory" => $ProductCategory,
+            ],
             201
         );
     }
@@ -46,7 +52,10 @@ class ProductCategoryController extends BaseController
         $ProductCategory->update($request->all());
 
         return response()->json(
-            ["success" => true, "ProductCategory" => $ProductCategory],
+            [
+                "success" => true,
+                "ProductCategory" => $ProductCategory,
+            ],
             200
         );
     }
@@ -64,6 +73,11 @@ class ProductCategoryController extends BaseController
             );
         }
         $ProductCategory->delete();
-        return response(["success" => true], 200);
+        return response(
+            [
+                "success" => true,
+            ],
+            200
+        );
     }
 }

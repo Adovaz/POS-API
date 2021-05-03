@@ -12,14 +12,25 @@ class BranchController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(["success" => true, Branch::all()], 201);
+        return response()->json(
+            [
+                "success" => true,
+                Branch::all(),
+            ],
+            201
+        );
     }
 
     public function get($id)
     {
         $Branch = Branch::find($id);
         if (!$Branch) {
-            return response()->json(["error" => "No Branch Found"], 401);
+            return response()->json(
+                [
+                    "error" => "No Branch Found",
+                ],
+                401
+            );
         }
         return response()->json(["success" => true, "branch" => $Branch], 201);
     }
@@ -30,10 +41,8 @@ class BranchController extends BaseController
             "name" => "required",
         ]);
 
-        /**Create Branch */
         $Branch = Branch::create($request->all());
 
-        /**Update Branch Stocks */
         foreach (ProductVariation::all() as $productvariation) {
             BranchStock::create([
                 "product_variation_id" => $productvariation->id,
@@ -41,19 +50,36 @@ class BranchController extends BaseController
                 "quantity" => 0,
             ]);
         }
-        return response()->json(["success" => true, "branch" => $Branch], 201);
+        return response()->json(
+            [
+                "success" => true,
+                "branch" => $Branch,
+            ],
+            201
+        );
     }
 
     public function update($id, Request $request)
     {
         $Branch = Branch::find($id);
         if (!$Branch) {
-            return response()->json(["error" => "No Branch Found"], 401);
+            return response()->json(
+                [
+                    "error" => "No Branch Found",
+                ],
+                401
+            );
         }
 
         $Branch->update($request->all());
 
-        return response()->json(["success" => true, "branch" => $Branch], 200);
+        return response()->json(
+            [
+                "success" => true,
+                "branch" => $Branch,
+            ],
+            200
+        );
     }
 
     public function delete($id)
@@ -61,9 +87,19 @@ class BranchController extends BaseController
         $Branch = Branch::find($id);
 
         if (!$Branch) {
-            return response()->json(["error" => "No Branch Found"], 401);
+            return response()->json(
+                [
+                    "error" => "No Branch Found",
+                ],
+                401
+            );
         }
         $Branch->delete();
-        return response(["success" => true], 200);
+        return response(
+            [
+                "success" => true,
+            ],
+            200
+        );
     }
 }
