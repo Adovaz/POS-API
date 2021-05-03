@@ -36,7 +36,6 @@ class SupplierController extends BaseController
     public function delete($id)
     {
         Supplier::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        return response("Deleted Successfully", 200);
     }
-
 }

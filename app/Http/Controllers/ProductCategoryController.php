@@ -10,32 +10,60 @@ class ProductCategoryController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(ProductCategory::all());
+        return response()->json(
+            ["success" => true, ProductCategory::all()],
+            201
+        );
     }
 
     public function get($id)
     {
-        return response()->json(ProductCategory::find($id));
+        $ProductCategory = ProductCategory::find($id);
+        if (!$ProductCategory) {
+            return response()->json(
+                [
+                    "error" => "No Category Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            ["success" => true, "ProductCategory" => $ProductCategory],
+            201
+        );
     }
-
-    public function create(Request $request)
-    {
-        $ProductCategory = ProductCategory::create($request->all());
-        return response()->json($ProductCategory, 201);
-    }
-
     public function update($id, Request $request)
     {
-        $ProductCategory = ProductCategory::findOrFail($id);
+        $ProductCategory = ProductCategory::find($id);
+        if (!$ProductCategory) {
+            return response()->json(
+                [
+                    "error" => "No Product Category Found",
+                ],
+                401
+            );
+        }
         $ProductCategory->update($request->all());
 
-        return response()->json($ProductCategory, 200);
+        return response()->json(
+            ["success" => true, "ProductCategory" => $ProductCategory],
+            200
+        );
     }
 
+    /**Not used or needed */
     public function delete($id)
     {
-        ProductCategory::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        $ProductCategory = ProductCategory::find($id);
+        if (!$ProductCategory) {
+            return response()->json(
+                [
+                    "error" => "No Product Category Found",
+                ],
+                401
+            );
+        }
+        $ProductCategory->delete();
+        return response(["success" => true], 200);
     }
-    
 }

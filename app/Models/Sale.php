@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'transaction_id', 'product_variation_id', 'quantity'
+        "transaction_id",
+        "product_variation_id",
+        "quantity",
     ];
 
     /**

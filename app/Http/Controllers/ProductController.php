@@ -36,7 +36,6 @@ class ProductController extends BaseController
     public function delete($id)
     {
         Product::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        return response("Deleted Successfully", 200);
     }
-    
 }

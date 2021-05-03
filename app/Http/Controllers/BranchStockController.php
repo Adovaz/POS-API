@@ -10,32 +10,76 @@ class BranchStockController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(BranchStock::all());
+        return response()->json(["success" => true, BranchStock::all()], 201);
     }
 
     public function get($id)
     {
-        return response()->json(BranchStock::find($id));
+        $BranchStock = BranchStock::find($id);
+        if (!$BranchStock) {
+            return response()->json(
+                [
+                    "error" => "No Branch Stock Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            ["success" => true, "branchstock" => $BranchStock],
+            201
+        );
     }
 
+    /**Not used or needed */
     public function create(Request $request)
     {
         $BranchStock = BranchStock::create($request->all());
-        return response()->json($BranchStock, 201);
+        if (!$BranchStock) {
+            return response()->json(
+                [
+                    "error" => "Error creating branch stock",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            ["success" => true, "branchstock" => $BranchStock],
+            201
+        );
     }
 
     public function update($id, Request $request)
     {
-        $BranchStock = BranchStock::findOrFail($id);
+        $BranchStock = BranchStock::find($id);
+        if (!$BranchStock) {
+            return response()->json(
+                [
+                    "error" => "No BranchStock Found",
+                ],
+                401
+            );
+        }
         $BranchStock->update($request->all());
 
-        return response()->json($BranchStock, 200);
+        return response()->json(
+            ["success" => true, "branchstock" => $BranchStock],
+            200
+        );
     }
 
+    /**Not used or needed */
     public function delete($id)
     {
-        BranchStock::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        $BranchStock = BranchStock::find($id);
+        if (!$BranchStock) {
+            return response()->json(
+                [
+                    "error" => "No BranchStock Found",
+                ],
+                401
+            );
+        }
+        $BranchStock->delete();
+        return response(["success" => true], 200);
     }
-    
 }

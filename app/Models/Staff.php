@@ -11,15 +11,12 @@ class Staff extends Model implements Authenticatable
 {
     use AuthenticableTrait;
 
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'password', 'remember_token'
-    ];
+    protected $fillable = ["name", "password", "remember_token"];
 
     /**
      * The attributes excluded from the model's JSON form.

@@ -21,31 +21,33 @@ class StaffController extends BaseController
     public function create(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:30',
-            'password' => 'required|max:1000',
+            "name" => "required|max:30",
+            "password" => "required|max:1000",
         ]);
         $Staff = Staff::create([
-            'name' => $request->name,
-            'password'=> Hash::make($request->get('password'))
+            "name" => $request->name,
+            "password" => Hash::make($request->get("password")),
         ]);
-        return response()->json(['status' => "success", "Staff_id" => $Staff->id], 201);
+        return response()->json(
+            ["status" => "success", "Staff_id" => $Staff->id],
+            201
+        );
     }
 
     public function update($id, Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:30',
-            'password' => 'required|max:1000',
+            "name" => "required|max:30",
+            "password" => "required|max:1000",
         ]);
         $Staff = Staff::findOrFail($id);
         $Staff->update($request->all());
-        return response()->json(['status' => "success",$Staff], 200);
+        return response()->json(["status" => "success", $Staff], 200);
     }
 
     public function delete($id)
     {
         Staff::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        return response("Deleted Successfully", 200);
     }
-    
 }

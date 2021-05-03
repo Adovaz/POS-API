@@ -23,23 +23,23 @@ class TransactionController extends BaseController
 
     public function create(Request $request)
     {
-        $Transaction = Transaction::create
-        ([
-            'staff_id' => $request->staff_id,
-            'total' => $request->total,
-            'transaction_type' => $request->transaction_type,
+        $Transaction = Transaction::create([
+            "staff_id" => $request->staff_id,
+            "total" => $request->total,
+            "transaction_type" => $request->transaction_type,
         ]);
-        foreach ($request->contents as $products)
-        {
-            Sale::create
-            ([
-                'transaction_id' => $Transaction->id,
-                'product_variation_id' => $products['product_variation_id'],
-                'quantity' => $products['quantity'],
+        foreach ($request->contents as $products) {
+            Sale::create([
+                "transaction_id" => $Transaction->id,
+                "product_variation_id" => $products["product_variation_id"],
+                "quantity" => $products["quantity"],
             ]);
-            BranchStock::where('product_variation_id', $products['product_variation_id'])
-            ->where('branch_id', $request->branch_id)
-            ->decrement('quantity', $products['quantity']);
+            BranchStock::where(
+                "product_variation_id",
+                $products["product_variation_id"]
+            )
+                ->where("branch_id", $request->branch_id)
+                ->decrement("quantity", $products["quantity"]);
         }
 
         return response()->json($Transaction, 201);
@@ -56,7 +56,6 @@ class TransactionController extends BaseController
     public function delete($id)
     {
         Transaction::findOrFail($id)->delete();
-        return response('Deleted Successfully', 200);
+        return response("Deleted Successfully", 200);
     }
-
 }

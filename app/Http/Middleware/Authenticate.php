@@ -17,29 +17,26 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $clientRememberToken = $request->header('Authorisation');
-        $staffId = $request->header('StaffId');
+        $clientRememberToken = $request->header("Authorization");
+        $staffId = $request->header("StaffId");
 
         /**ValidateHeaders */
-        if(!($clientRememberToken)){
-
-            return response()->json('No headers for Token', 401);
+        if (!$clientRememberToken) {
+            return response()->json("No headers for Token", 401);
         }
-        if(!($staffId)){
-
-            return response()->json('No headers for Staff Id', 401);
+        if (!$staffId) {
+            return response()->json("No headers for Staff Id", 401);
         }
 
         /**Get staffs remember token from database */
-        $rememberTokenAgainst = Staff::where('id', $staffId)->value('remember_token');
+        $rememberTokenAgainst = Staff::where("id", $staffId)->value(
+            "remember_token"
+        );
 
-        if ($clientRememberToken == $rememberTokenAgainst) 
-        {
+        if ($clientRememberToken == $rememberTokenAgainst) {
             return $next($request);
+        } else {
+            return response()->json("Unauthorized.", 401);
         }
-        else {
-            return response()->json('Unauthorized.', 401);
-        }
-
     }
 }
