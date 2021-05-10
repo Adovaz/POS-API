@@ -37,9 +37,13 @@ $router->group(["prefix" => "productvariations"], function () use ($router) {
     $router->get("all", ["uses" => "ProductVariationController@getAll"]);
 
     /**Note
-     * Get method requires the parent product id NOT the pimary id
+     * Get method requires the parent product id NOT the primary id
      */
     $router->get("get/{id}", ["uses" => "ProductVariationController@get"]);
+
+    $router->get("barcode/{barcode}", [
+        "uses" => "ProductVariationController@getByBarcode",
+    ]);
 
     $router->post("new", ["uses" => "ProductVariationController@create"]);
 

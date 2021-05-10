@@ -24,11 +24,12 @@ class ProductVariationController extends BaseController
 
     public function get($id)
     {
-        $ProductVariation = ProductVariation::find($id);
-        if (!$ProductVariation) {
+        $ProductVariations = ProductVariation::where("product_id", $id)->get();
+        if (!$ProductVariations) {
             return response()->json(
                 [
-                    "error" => "No Product Found",
+                    "error" =>
+                        "No product Variations With That Parent Id Found",
                 ],
                 401
             );
@@ -36,11 +37,37 @@ class ProductVariationController extends BaseController
         return response()->json(
             [
                 "success" => true,
-                "Productvariation" => $ProductVariation,
+                "productVariations" => $ProductVariations,
             ],
             201
         );
     }
+
+    public function getByBarcode($barcode)
+    {
+        $ProductVariation = ProductVariation::where("barcode_0", $barcode)
+            ->orWhere("barcode_1", $barcode)
+            ->orWhere("barcode_2", $barcode)
+            ->get();
+
+        if ($ProductVariation == false) {
+            return response()->json(
+                [
+                    "error" =>
+                        "No product Variations With That Parent Id Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            [
+                "success" => true,
+                "productVariation" => $ProductVariation,
+            ],
+            201
+        );
+    }
+
     public function create(Request $request)
     {
         $this->validate($request, [
