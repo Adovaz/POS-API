@@ -13,49 +13,84 @@ class TransactionController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(Transaction::all());
+        return response()->json(
+            [
+                "success" => true,
+                Transaction::all(),
+            ],
+            201
+        );
     }
 
     public function get($id)
     {
-        return response()->json(Transaction::find($id));
+        $Transaction = Transaction::find($id);
+        if (!$Transaction) {
+            return response()->json(
+                [
+                    "error" => "No Transaction Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            [
+                "success" => true,
+                "Transaction" => $Transaction,
+            ],
+            201
+        );
     }
 
     public function create(Request $request)
     {
         $Transaction = Transaction::create([
-            "staff_id" => $request->staff_id,
+            "staff_id" => $request->header("staffId"),
             "total" => $request->total,
             "transaction_type" => $request->transaction_type,
         ]);
+
         foreach ($request->contents as $products) {
             Sale::create([
                 "transaction_id" => $Transaction->id,
                 "product_variation_id" => $products["product_variation_id"],
                 "quantity" => $products["quantity"],
             ]);
+
             BranchStock::where(
                 "product_variation_id",
                 $products["product_variation_id"]
             )
-                ->where("branch_id", $request->branch_id)
+                ->where("branch_id", $request->header("branchId"))
                 ->decrement("quantity", $products["quantity"]);
         }
 
-        return response()->json($Transaction, 201);
-    }
-
-    public function update($id, Request $request)
-    {
-        $Transaction = Transaction::findOrFail($id);
-        $Transaction->update($request->all());
-
-        return response()->json($Transaction, 200);
+        return response()->json(
+            [
+                "success" => true,
+                "Transaction" => $Transaction,
+            ],
+            201
+        );
     }
 
     public function delete($id)
     {
-        Transaction::findOrFail($id)->delete();
-        return response("Deleted Successfully", 200);
+        $Transaction = Transaction::find($id);
+        if (!$Transaction) {
+            return response()->json(
+                [
+                    "error" => "No Transaction Found",
+                ],
+                401
+            );
+        }
+        $Transaction->delete();
+        return response(
+            [
+                "success" => true,
+            ],
+            200
+        );
     }
 }

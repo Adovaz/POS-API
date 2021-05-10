@@ -13,15 +13,34 @@ class ProductVariationController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(ProductVariation::all());
+        return response()->json(
+            [
+                "success" => true,
+                ProductVariation::all(),
+            ],
+            201
+        );
     }
 
     public function get($id)
     {
-        $ProductVariations = ProductVariation::where("product_id", $id)->get();
-        return response()->json($ProductVariations);
+        $ProductVariation = ProductVariation::find($id);
+        if (!$ProductVariation) {
+            return response()->json(
+                [
+                    "error" => "No Product Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            [
+                "success" => true,
+                "Productvariation" => $ProductVariation,
+            ],
+            201
+        );
     }
-
     public function create(Request $request)
     {
         $this->validate($request, [
@@ -40,7 +59,13 @@ class ProductVariationController extends BaseController
                 "quantity" => 0,
             ]);
         }
-        return response()->json($ProductVariation, 201);
+        return response()->json(
+            [
+                "success" => true,
+                "ProductVariation" => $ProductVariation,
+            ],
+            201
+        );
     }
 
     public function update($id, Request $request)
@@ -49,17 +74,31 @@ class ProductVariationController extends BaseController
         $ProductVariation->update($request->all());
 
         return response()->json(
-            ["status" => "success", "updated" => $ProductVariation],
+            [
+                "status" => "success",
+                "updated" => $ProductVariation,
+            ],
             200
         );
     }
 
     public function delete($id)
     {
-        if (ProductVariation::findOrFail($id)->delete()) {
-            return response(["status" => "success"], 200);
-        } else {
-            return response(["status" => "fail"], 400);
+        $ProductVariation = ProductVariation::find($id);
+        if (!$ProductVariation) {
+            return response()->json(
+                [
+                    "error" => "No ProductVariation Found",
+                ],
+                401
+            );
         }
+        $ProductVariation->delete();
+        return response(
+            [
+                "success" => true,
+            ],
+            200
+        );
     }
 }

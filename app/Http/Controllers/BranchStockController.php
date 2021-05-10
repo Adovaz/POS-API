@@ -39,7 +39,6 @@ class BranchStockController extends BaseController
         );
     }
 
-    /**Not used or needed */
     public function create(Request $request)
     {
         $BranchStock = BranchStock::create($request->all());

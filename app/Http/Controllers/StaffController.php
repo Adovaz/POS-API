@@ -10,12 +10,33 @@ class StaffController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(Staff::all());
+        return response()->json(
+            [
+                "success" => true,
+                "staff" => Staff::all(),
+            ],
+            201
+        );
     }
 
     public function get($id)
     {
-        return response()->json(Staff::find($id));
+        $Staff = Staff::find($id);
+        if (!$Staff) {
+            return response()->json(
+                [
+                    "error" => "No Staff Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            [
+                "success" => true,
+                "Staff" => $Staff,
+            ],
+            201
+        );
     }
 
     public function create(Request $request)
@@ -29,7 +50,10 @@ class StaffController extends BaseController
             "password" => Hash::make($request->get("password")),
         ]);
         return response()->json(
-            ["status" => "success", "Staff_id" => $Staff->id],
+            [
+                "status" => "success",
+                "Staff_id" => $Staff->id,
+            ],
             201
         );
     }
@@ -42,12 +66,32 @@ class StaffController extends BaseController
         ]);
         $Staff = Staff::findOrFail($id);
         $Staff->update($request->all());
-        return response()->json(["status" => "success", $Staff], 200);
+        return response()->json(
+            [
+                "status" => "success",
+                "staff" => $Staff,
+            ],
+            200
+        );
     }
 
     public function delete($id)
     {
-        Staff::findOrFail($id)->delete();
-        return response("Deleted Successfully", 200);
+        $Staff = Staff::find($id);
+        if (!$Staff) {
+            return response()->json(
+                [
+                    "error" => "No Staff Found",
+                ],
+                401
+            );
+        }
+        $Staff->delete();
+        return response(
+            [
+                "success" => true,
+            ],
+            200
+        );
     }
 }

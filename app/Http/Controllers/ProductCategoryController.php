@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use Laravel\Lumen\Routing\Controller as BaseController;
@@ -33,11 +35,33 @@ class ProductCategoryController extends BaseController
         return response()->json(
             [
                 "success" => true,
-                "ProductCategory" => $ProductCategory,
+                "productCategory" => $ProductCategory,
             ],
             201
         );
     }
+
+    public function create(Request $request)
+    {
+        $ProductCategory = ProductCategory::create($request->all());
+
+        if (!$ProductCategory) {
+            return response()->json(
+                [
+                    "error" => "Error creating Product Category",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            [
+                "success" => true,
+                "productCategory" => $ProductCategory,
+            ],
+            201
+        );
+    }
+
     public function update($id, Request $request)
     {
         $ProductCategory = ProductCategory::find($id);
@@ -60,7 +84,6 @@ class ProductCategoryController extends BaseController
         );
     }
 
-    /**Not used or needed */
     public function delete($id)
     {
         $ProductCategory = ProductCategory::find($id);

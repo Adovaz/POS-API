@@ -32,7 +32,13 @@ class BranchController extends BaseController
                 401
             );
         }
-        return response()->json(["success" => true, "branch" => $Branch], 201);
+        return response()->json(
+            [
+                "success" => true,
+                "branch" => $Branch,
+            ],
+            201
+        );
     }
 
     public function create(Request $request)

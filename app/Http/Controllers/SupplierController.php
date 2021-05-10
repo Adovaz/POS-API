@@ -10,32 +10,95 @@ class SupplierController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(Supplier::all());
+        return response()->json(
+            [
+                "success" => true,
+                Supplier::all(),
+            ],
+            201
+        );
     }
 
     public function get($id)
     {
-        return response()->json(Supplier::find($id));
+        $Supplier = Supplier::find($id);
+        if (!$Supplier) {
+            return response()->json(
+                [
+                    "error" => "No Supplier Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            [
+                "success" => true,
+                "Supplier" => $Supplier,
+            ],
+            201
+        );
     }
 
-    public function create(Request $request)
+  public function create(Request $request)
     {
-        $supplier = Supplier::create($request->all());
+        $Supplier = Supplier::create($request->all());
 
-        return response()->json($supplier, 201);
+        if (!$Supplier) {
+            return response()->json(
+                [
+                    "error" => "Error creating Supplier",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            [
+                "success" => true,
+                "supplier" => $Supplier,
+            ],
+            201
+        );
     }
 
-    public function update($id, Request $request)
+ public function update($id, Request $request)
     {
-        $supplier = Supplier::findOrFail($id);
-        $supplier->update($request->all());
+        $Supplier = Supplier::find($id);
+        if (!$Supplier) {
+            return response()->json(
+                [
+                    "error" => "No Supplier Category Found",
+                ],
+                401
+            );
+        }
+        $Supplier->update($request->all());
 
-        return response()->json($supplier, 200);
+        return response()->json(
+            [
+                "success" => true,
+                "supplier" => $Supplier,
+            ],
+            200
+        );
     }
 
     public function delete($id)
     {
-        Supplier::findOrFail($id)->delete();
-        return response("Deleted Successfully", 200);
+        $Supplier = Supplier::find($id);
+        if (!$Supplier) {
+            return response()->json(
+                [
+                    "error" => "No Supplier Found",
+                ],
+                401
+            );
+        }
+        $Supplier->delete();
+        return response(
+            [
+                "success" => true,
+            ],
+            200
+        );
     }
 }
