@@ -14,7 +14,6 @@ class BranchController extends BaseController
     {
         return response()->json(
             [
-                "success" => true,
                 Branch::all(),
             ],
             201
@@ -34,7 +33,6 @@ class BranchController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "branch" => $Branch,
             ],
             201
@@ -58,7 +56,6 @@ class BranchController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "branch" => $Branch,
             ],
             201
@@ -81,7 +78,6 @@ class BranchController extends BaseController
 
         return response()->json(
             [
-                "success" => true,
                 "branch" => $Branch,
             ],
             200

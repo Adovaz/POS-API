@@ -12,7 +12,6 @@ class StaffController extends BaseController
     {
         return response()->json(
             [
-                "success" => true,
                 "staff" => Staff::all(),
             ],
             201
@@ -32,7 +31,6 @@ class StaffController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "Staff" => $Staff,
             ],
             201
@@ -51,7 +49,6 @@ class StaffController extends BaseController
         ]);
         return response()->json(
             [
-                "status" => "success",
                 "Staff_id" => $Staff->id,
             ],
             201
@@ -68,7 +65,6 @@ class StaffController extends BaseController
         $Staff->update($request->all());
         return response()->json(
             [
-                "status" => "success",
                 "staff" => $Staff,
             ],
             200

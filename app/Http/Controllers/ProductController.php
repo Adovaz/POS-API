@@ -12,7 +12,6 @@ class ProductController extends BaseController
     {
         return response()->json(
             [
-                "success" => true,
                 Product::all(),
             ],
             201
@@ -32,7 +31,6 @@ class ProductController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "Product" => $Product,
             ],
             201
@@ -54,7 +52,6 @@ class ProductController extends BaseController
 
         return response()->json(
             [
-                "success" => true,
                 "product" => $Product,
             ],
             201
@@ -76,7 +73,6 @@ class ProductController extends BaseController
 
         return response()->json(
             [
-                "success" => true,
                 "Product" => $Product,
             ],
             200

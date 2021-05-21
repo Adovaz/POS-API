@@ -12,7 +12,6 @@ class BranchStockController extends BaseController
     {
         return response()->json(
             [
-                "success" => true,
                 BranchStock::all(),
             ],
             201
@@ -32,7 +31,6 @@ class BranchStockController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "stock" => $BranchStock,
             ],
             201
@@ -53,7 +51,6 @@ class BranchStockController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "stock" => $BranchStock,
             ],
             201
@@ -76,7 +73,6 @@ class BranchStockController extends BaseController
 
         return response()->json(
             [
-                "success" => true,
                 "stock" => $BranchStock,
             ],
             200

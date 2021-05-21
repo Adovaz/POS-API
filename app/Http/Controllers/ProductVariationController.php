@@ -13,13 +13,7 @@ class ProductVariationController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(
-            [
-                "success" => true,
-                ProductVariation::all(),
-            ],
-            201
-        );
+        return response()->json([ProductVariation::all()], 201);
     }
 
     public function get($id)
@@ -36,7 +30,6 @@ class ProductVariationController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "productVariations" => $ProductVariations,
             ],
             201
@@ -50,7 +43,7 @@ class ProductVariationController extends BaseController
             ->orWhere("barcode_2", $barcode)
             ->get();
 
-        if ($ProductVariation == false) {
+        if (!$ProductVariation) {
             return response()->json(
                 [
                     "error" =>
@@ -61,7 +54,6 @@ class ProductVariationController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "productVariation" => $ProductVariation,
             ],
             201
@@ -88,7 +80,6 @@ class ProductVariationController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "ProductVariation" => $ProductVariation,
             ],
             201
@@ -102,7 +93,6 @@ class ProductVariationController extends BaseController
 
         return response()->json(
             [
-                "status" => "success",
                 "updated" => $ProductVariation,
             ],
             200

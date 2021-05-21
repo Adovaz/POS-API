@@ -13,13 +13,7 @@ class TransactionController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(
-            [
-                "success" => true,
-                Transaction::all(),
-            ],
-            201
-        );
+        return response()->json([Transaction::all()], 201);
     }
 
     public function get($id)
@@ -35,7 +29,6 @@ class TransactionController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "Transaction" => $Transaction,
             ],
             201
@@ -67,7 +60,6 @@ class TransactionController extends BaseController
 
         return response()->json(
             [
-                "success" => true,
                 "Transaction" => $Transaction,
             ],
             201

@@ -32,7 +32,6 @@ class AuthController extends BaseController
             $Staff->save();
             return response()->json(
                 [
-                    "success" => true,
                     "remember_token" => $token,
                 ],
                 200

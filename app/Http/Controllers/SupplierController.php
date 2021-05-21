@@ -12,7 +12,6 @@ class SupplierController extends BaseController
     {
         return response()->json(
             [
-                "success" => true,
                 Supplier::all(),
             ],
             201
@@ -32,7 +31,6 @@ class SupplierController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "Supplier" => $Supplier,
             ],
             201
@@ -53,7 +51,6 @@ class SupplierController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "supplier" => $Supplier,
             ],
             201
@@ -75,7 +72,6 @@ class SupplierController extends BaseController
 
         return response()->json(
             [
-                "success" => true,
                 "supplier" => $Supplier,
             ],
             200

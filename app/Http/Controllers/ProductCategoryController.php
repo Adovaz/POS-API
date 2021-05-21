@@ -12,13 +12,7 @@ class ProductCategoryController extends BaseController
 {
     public function getAll()
     {
-        return response()->json(
-            [
-                "success" => true,
-                ProductCategory::all(),
-            ],
-            201
-        );
+        return response()->json([ProductCategory::all()], 201);
     }
 
     public function get($id)
@@ -34,7 +28,6 @@ class ProductCategoryController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "productCategory" => $ProductCategory,
             ],
             201
@@ -55,7 +48,6 @@ class ProductCategoryController extends BaseController
         }
         return response()->json(
             [
-                "success" => true,
                 "productCategory" => $ProductCategory,
             ],
             201
@@ -77,7 +69,6 @@ class ProductCategoryController extends BaseController
 
         return response()->json(
             [
-                "success" => true,
                 "ProductCategory" => $ProductCategory,
             ],
             200
