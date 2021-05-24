@@ -43,7 +43,7 @@ class ProductVariationController extends BaseController
             ->orWhere("barcode_2", $barcode)
             ->get();
 
-        if (!$ProductVariation) {
+        if ($ProductVariation == null) {
             return response()->json(
                 [
                     "error" =>

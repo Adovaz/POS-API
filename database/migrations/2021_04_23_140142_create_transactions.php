@@ -13,13 +13,21 @@ class CreateTransactions extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create("transactions", function (Blueprint $table) {
             $table->id();
-            $table->foreignId('staff_id')
-            ->constrained()
-            ->onUpdate('cascade');
-            $table->double('total', 8, 2);
-            $table->enum('transaction_type',['sale', 'deposit', 'finalise']);
+            $table
+                ->foreignId("staff_id")
+                ->constrained()
+                ->onUpdate("cascade");
+            $table->double("total", 8, 2);
+            $table->enum("transaction_type", ["sale", "deposit", "finalise"]);
+            $table->enum("payment_method", [
+                "cash",
+                "debit",
+                "eftpos",
+                "matercard",
+                "giftcard",
+            ]);
             $table->timestamps();
         });
     }
@@ -31,6 +39,6 @@ class CreateTransactions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists("transactions");
     }
 }
