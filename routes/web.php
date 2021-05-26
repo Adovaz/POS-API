@@ -58,7 +58,7 @@ $router->group(["prefix" => "productvariations"], function () use ($router) {
 
 /**Routing for transactions */
 
-$router->group(["prefix" => "transaction"], function () use ($router) {
+$router->group(["prefix" => "transactions"], function () use ($router) {
     $router->get("all", ["uses" => "TransactionController@getAll"]);
 
     $router->get("get/{id}", ["uses" => "TransactionController@get"]);
