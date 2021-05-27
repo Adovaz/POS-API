@@ -38,7 +38,7 @@ class TransactionController extends BaseController
     public function create(Request $request)
     {
         $Transaction = Transaction::create([
-            "staff_id" => $request->header("staffId"),
+            "staff_id" => $request->header("staff_id"),
             "total" => $request->total,
             "transaction_type" => $request->transaction_type,
         ]);
