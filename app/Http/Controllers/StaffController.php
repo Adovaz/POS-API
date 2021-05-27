@@ -50,6 +50,7 @@ class StaffController extends BaseController
         return response()->json(
             [
                 "Staff_id" => $Staff->id,
+                "Name" => $Staff->name,
             ],
             201
         );
