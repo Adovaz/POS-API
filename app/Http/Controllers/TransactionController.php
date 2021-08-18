@@ -14,6 +14,8 @@ class TransactionController extends BaseController
     public function getAll()
     {
         return response()->json([Transaction::all()], 201);
+        return response()->json([Sale::all()], 201);
+
     }
 
     public function get($id)
@@ -30,6 +32,7 @@ class TransactionController extends BaseController
         return response()->json(
             [
                 "Transaction" => $Transaction,
+                "Sale" => Sale::where("transaction_id", $Transaction->id)
             ],
             201
         );
@@ -38,24 +41,24 @@ class TransactionController extends BaseController
     public function create(Request $request)
     {
         $Transaction = Transaction::create([
-            "staff_id" => $request->staff_id,
-            "total" => $request->total,
-            "transaction_type" => $request->transaction_type,
+            "staff_id" => $request->json()->get("staff_id"),
+            "total" => $request->json()->get("total"),
+            "transaction_type" => $request->json()->get("transaction_type"),
         ]);
 
-        foreach ($request->contents as $products) {
+        foreach ($request->json()->get("contents") as $products) {
             Sale::create([
                 "transaction_id" => $Transaction->id,
                 "product_variation_id" => $products["product_variation_id"],
                 "quantity" => $products["quantity"],
             ]);
 
-            BranchStock::where(
-                "product_variation_id",
-                $products["product_variation_id"]
-            )
-                ->where("branch_id", $request->header("branchId"))
-                ->decrement("quantity", $products["quantity"]);
+         //   BranchStock::where(
+         //       "product_variation_id",
+         //       $products["product_variation_id"]
+         //   )
+         //       ->where("branch_id", $request->header("branchId"))
+           //     ->decrement("quantity", $products["quantity"]);
         }
 
         return response()->json(
