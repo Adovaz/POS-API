@@ -21,13 +21,6 @@ class CreateTransactions extends Migration
                 ->onUpdate("cascade");
             $table->double("total", 8, 2);
             $table->enum("transaction_type", ["sale", "deposit", "finalise"]);
-            $table->enum("payment_method", [
-                "cash",
-                "debit",
-                "eftpos",
-                "matercard",
-                "giftcard",
-            ]);
             $table->timestamps();
         });
     }
