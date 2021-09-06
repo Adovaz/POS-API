@@ -63,6 +63,10 @@ $router->group(["prefix" => "transactions"], function () use ($router) {
 
     $router->get("get/{id}", ["uses" => "TransactionController@get"]);
 
+    $router->get("sale/{id}", ["uses" => "TransactionController@getSale"]);
+
+    $router->get("sales", ["uses" => "TransactionController@allSales"]);
+
     $router->post("new", ["uses" => "TransactionController@create"]);
 
     $router->put("update/{id}", ["uses" => "TransactionController@update"]);

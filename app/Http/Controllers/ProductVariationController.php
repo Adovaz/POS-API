@@ -15,8 +15,24 @@ class ProductVariationController extends BaseController
     {
         return response()->json([ProductVariation::all()], 201);
     }
-
+    
     public function get($id)
+    {
+        $ProductVariation = ProductVariation::find($id);
+        if (!$ProductVariation) {
+            return response()->json(
+                [
+                    "error" => "No variations",
+                ],
+                401
+            );
+        }
+        return response()->json( $ProductVariation,
+            201
+        );
+    }
+    
+    public function getFromParent($id)
     {
         $ProductVariations = ProductVariation::where("product_id", $id)->get();
         if (!$ProductVariations) {

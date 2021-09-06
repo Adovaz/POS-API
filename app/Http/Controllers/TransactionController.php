@@ -13,9 +13,30 @@ class TransactionController extends BaseController
 {
     public function getAll()
     {
-        return response()->json([Transaction::all()], 201);
-        return response()->json([Sale::all()], 201);
+        return response()->json(Transaction::all(), 201);       
 
+    }
+
+    public function allSales()
+    {
+        return response()->json([Sale::all()], 201);
+    }
+
+    public function getSale($id)
+    {
+        $Sale = Sale::where("transaction_id", $id)->get();
+        if (!$Sale) {
+            return response()->json(
+                [
+                    "error" => "No Sale Found",
+                ],
+                401
+            );
+        }
+        return response()->json(
+            $Sale,
+            201 
+        );
     }
 
     public function get($id)
@@ -32,7 +53,6 @@ class TransactionController extends BaseController
         return response()->json(
             [
                 "Transaction" => $Transaction,
-                "Sale" => Sale::where("transaction_id", $Transaction->id)
             ],
             201
         );
